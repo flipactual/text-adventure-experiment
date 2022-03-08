@@ -2,7 +2,7 @@
 
 ```mermaid
 classDiagram
-class Engine~State extends Record~ {
+class Engine~State extends Record, Actions extends Record~ {
   -State state
   +processInput(input: string)
   -parseCommand(verb: string, noun: string) Command
