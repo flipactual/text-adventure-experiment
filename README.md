@@ -2,20 +2,14 @@
 
 ```mermaid
 classDiagram
-class Game {
+class Engine {
+  +Record~string, unknown~ state
   +processInput(input: string)
-}
-class Command {
   +parseCommand(verb: string, noun: string) Command
   +executeCommand(world: World, command: Command)
 }
-class World {
-  +Record~string, boolean~ state
-}
-class Location {
-  asdf
-}
-class Exit {
-  asdf
+class Command {
+  +string verb
+  +string noun
 }
 ```
