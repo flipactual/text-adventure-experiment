@@ -2,11 +2,13 @@
 
 ```mermaid
 classDiagram
+class State {
+  +unknown [k: string]
+}
 class Engine {
-  +Record~string, unknown~ state
-  +processInput(input: string)
+  +State state
   +parseCommand(verb: string, noun: string) Command
-  +executeCommand(world: World, command: Command)
+  +executeCommand(world: World, command: Command) State
 }
 class Command {
   +string verb
