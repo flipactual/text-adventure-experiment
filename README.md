@@ -8,21 +8,25 @@ class EngineArgs~Flags extends Record❬string, boolean❭, Scenes extends Recor
   scenes: Scenes
   startingScene: keyof Scenes
 }
+EngineArgs .. Scene
 class Executable~T~ {
   <<Interface>>
-  execute(flags: ReadOnly~EngineArgs['flags']~) : T
+  execute(flags: ReadOnly~EngineArgs['flags']~) T
 }
 class Scene {
   description: string
   actions: Action[]
-  execute(flags: ReadOnly~EngineArgs['flags']~) : string
+  execute(flags: ReadOnly~EngineArgs['flags']~) string
 }
-Scene --|> Executable : implements
+Scene .. Action
+Scene --|> Executable : extends
 class Action {
   trigger: Trigger
-  execute(flags: ReadOnly~EngineArgs['flags']~) : Result
+  execute(flags: ReadOnly~EngineArgs['flags']~) Result
 }
-Action --|> Executable : implements
+Action .. Trigger
+Action .. Result
+Action --|> Executable : extends
 class Trigger {
   @TODO
 }
@@ -41,6 +45,8 @@ class Engine {
   -parseInput(verb: string, noun: string) Command
   -executeCommand(flags: ReadOnly~EngineArgs['flags']~, command: Command)
 }
+Engine .. EngineArgs
+Engine .. Command
 class Command {
   +string verb
   +string noun
