@@ -2,26 +2,26 @@
 
 ```mermaid
 classDiagram
-class EngineArgs~Flags extends Record❬string, boolean❭, Scenes extends Record❬string, Scene❭~ {
+class GameArgs~Flags extends Record❬string, boolean❭, Scenes extends Record❬string, Scene❭~ {
   <<Type>>
   flags: Flags
   scenes: Scenes
   startingScene: keyof Scenes
 }
-EngineArgs .. Scene
+GameArgs .. Scene
 class Executable~T~ {
   <<Interface>>
-  execute(flags: ReadOnly~EngineArgs['flags']~) T
+  execute(flags: ReadOnly~GameArgs['flags']~) T
 }
 class Scene {
   actions: [Command, Action][]
-  execute(flags: ReadOnly~EngineArgs['flags']~) string
+  execute(flags: ReadOnly~GameArgs['flags']~) string
 }
 Scene .. Command
 Scene .. Action
 Scene --|> Executable : extends
 class Action {
-  execute(flags: ReadOnly~EngineArgs['flags']~) Result
+  execute(flags: ReadOnly~GameArgs['flags']~) Result
 }
 Action .. Result
 Action --|> Executable : extends
@@ -32,19 +32,22 @@ class Result {
   FLAG_TOGGLE
   GOTO
 }
-class Engine~Flags extends Record❬string, boolean❭, Scenes extends Record❬string, Scene❭~ {
+class Game~Flags extends Record❬string, boolean❭, Scenes extends Record❬string, Scene❭~ {
   flags: Flags
   scenes: Scenes
   currentScene: keyof Scenes
-  constructor(args: EngineArgs)
+  verbs: TermDictionary~Verb~
+  nouns: TermDictionary~Noun~
+  constructor(args: GameeArgs)
   handleInput(input: string)
   parseInput(verb: Verb, noun: Noun) Command
   executeCommand(flags: ReadOnly~EngineArgs['flags']~, command: Command)
 }
-Engine .. EngineArgs
-Engine .. Verb
-Engine .. Noun
-Engine .. Command
+Game .. GameArgs
+Game .. Verb
+Game .. Noun
+Game .. TermDictionary
+Game .. Command
 class Command {
   verb: Verb
   noun: Noun
