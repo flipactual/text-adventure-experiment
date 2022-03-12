@@ -52,21 +52,15 @@ class Command {
 Command .. Verb
 Command .. Noun
 class Term {
-  <<Interface>>
-  name: string
-  matches: string[]
-  equals(term: T extends Term) boolean
-}
-class Verb {
-  name: string
-  matches: string[]
-  equals(term: Verb) boolean
+  constructor(public name: string, public matches: string[])
+  isEqual(term: Term) boolean 
 }
 Verb --|> Term : extends
-class Noun {
-  name: string
-  matches: string[]
-  equals(term: Noun) boolean
-}
 Noun --|> Term : extends
+class TermDictionary~T extends Term~ {
+  terms: Record<string, T>
+  constructor(terms: T[])
+  get(term: string) (T | undefined)
+}
+TermDictionary .. Term
 ```
