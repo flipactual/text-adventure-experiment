@@ -38,7 +38,7 @@ class Game~Flags extends Record❬string, boolean❭, Scenes extends Record❬st
   currentScene: keyof Scenes
   verbs: TermDictionary~Verb~
   nouns: TermDictionary~Noun~
-  constructor(args: GameeArgs)
+  constructor(args: GameArgs)
   handleInput(input: string)
   parseInput(verb: Verb, noun: Noun) Command
   executeCommand(flags: ReadOnly~GameArgs['flags']~, command: Command)
