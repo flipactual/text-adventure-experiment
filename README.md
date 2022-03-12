@@ -55,14 +55,14 @@ class Command {
 Command .. Verb
 Command .. Noun
 class Term {
-  constructor(public name: string, public matches: string[])
-  isEqual(term: Term) boolean 
+  constructor(public name: string, public matches: Readonly~string[]~)
+  isEqual(term: Readonly~Term~) boolean 
 }
 Verb --|> Term : extends
 Noun --|> Term : extends
 class TermDictionary~T extends Term~ {
   terms: Record<string, T>
-  constructor(terms: T[])
+  constructor(terms: Readonly~T[]~)
   get(term: string) (T | undefined)
 }
 TermDictionary .. Term
