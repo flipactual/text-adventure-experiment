@@ -4,7 +4,7 @@
 classDiagram
 class GameArgs~Flags extends Record❬string, boolean❭, Scenes extends Record❬string, Scene❭~ {
   <<Type>>
-  flags: Flags
+  flags: FlagsE
   scenes: Scenes
   startingScene: keyof Scenes
 }
@@ -41,7 +41,7 @@ class Game~Flags extends Record❬string, boolean❭, Scenes extends Record❬st
   constructor(args: GameeArgs)
   handleInput(input: string)
   parseInput(verb: Verb, noun: Noun) Command
-  executeCommand(flags: ReadOnly~EngineArgs['flags']~, command: Command)
+  executeCommand(flags: ReadOnly~GameArgs['flags']~, command: Command)
 }
 Game .. GameArgs
 Game .. Verb
