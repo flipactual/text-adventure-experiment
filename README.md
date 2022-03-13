@@ -49,8 +49,8 @@ Game .. Noun
 Game .. TermDictionary
 Game .. Command
 class Command {
-  verb: Verb
-  noun: Noun
+  public(public verb: Verb, public noun: Noun)
+  isEqual(command: Readonly~Command~): boolean
 }
 Command .. Verb
 Command .. Noun
