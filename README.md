@@ -4,33 +4,27 @@
 classDiagram
 class GameArgs~Flags extends Record❬string, boolean❭, Scenes extends Record❬string, Scene❭~ {
   <<Type>>
-  flags: FlagsE
+  flags: Flags
   scenes: Scenes
   startingScene: keyof Scenes
 }
 GameArgs .. Scene
-class Executable~T~ {
-  <<Interface>>
-  execute(flags: ReadOnly~GameArgs['flags']~) T
-}
 class Scene {
-  actions: [Command, Action][]
+  constructor(public actions: [Command, Action][])
   execute(flags: ReadOnly~GameArgs['flags']~) string
 }
 Scene .. Command
 Scene .. Action
-Scene --|> Executable : extends
 class Action {
   execute(flags: ReadOnly~GameArgs['flags']~) Result
 }
 Action .. Result
-Action --|> Executable : extends
 class Result {
   <<Enum>>
-  FLAG_TRUE
-  FLAG_FALSE
-  FLAG_TOGGLE
-  GOTO
+  FlagTrue
+  FlagFalse
+  FlagToggle
+  GoTo
 }
 class Game~Flags extends Record❬string, boolean❭, Scenes extends Record❬string, Scene❭~ {
   flags: Flags
